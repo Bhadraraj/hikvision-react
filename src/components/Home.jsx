@@ -1,22 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Home = () => {
-    const [zoomIndex, setZoomIndex] = useState(0);
-    const [isZoomedIn, setIsZoomedIn] = useState(false);
-    const videoRefs = useRef([]);
+    const [zoomIndex, setZoomIndex] = useState(0); // Track which video is zooming
+    const [isZoomedIn, setIsZoomedIn] = useState(false); // Track if a video is zoomed in
 
+    // Videos to be rendered
     const videos = [
         'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
+
         'https://www.w3schools.com/html/mov_bbb.mp4',
         'https://www.w3schools.com/html/mov_bbb.mp4',
         'https://www.w3schools.com/html/mov_bbb.mp4',
@@ -27,34 +18,25 @@ const Home = () => {
 
     useEffect(() => {
         const handleZoomEffect = () => {
-            setIsZoomedIn(true);
-
-            // Play video when zooming in
-            if (videoRefs.current[zoomIndex]) {
-                videoRefs.current[zoomIndex].play();
-            }
+            setIsZoomedIn(true); // Start zooming in
 
             setTimeout(() => {
-                setIsZoomedIn(false);
-                // Pause video when zooming out
-                if (videoRefs.current[zoomIndex]) {
-                    videoRefs.current[zoomIndex].pause();
-                }
-            }, 5000);
+                setIsZoomedIn(false); // Start zooming out
+            }, 5000); // Hold zoom for 5 seconds
 
             setTimeout(() => {
                 setZoomIndex((prevIndex) => (prevIndex + 1) % videos.length);
-            }, 8000);
+            }, 8000); // 3s zoom-in + 5s hold time = 8s
         };
 
-        handleZoomEffect();
+        handleZoomEffect(); // Start the zoom effect
 
         const interval = setInterval(() => {
             handleZoomEffect();
-        }, 8000);
+        }, 8000); // Repeat every 8 seconds
 
-        return () => clearInterval(interval);
-    }, [videos.length, zoomIndex]);
+        return () => clearInterval(interval); // Cleanup
+    }, [videos.length]);
 
     return (
         <div className="video-container">
@@ -63,11 +45,11 @@ const Home = () => {
             {videos.map((videoSrc, index) => (
                 <div className="videoCovercontainer" key={index}>
                     <video
-                        ref={(el) => (videoRefs.current[index] = el)}
                         className={`video-element ${zoomIndex === index ? (isZoomedIn ? 'zoom' : 'zoom-out') : ''}`}
-                        controls muted
+                        controls autoPlay muted
                     >
                         <source src={videoSrc} type="video/mp4" />
+                        Your browser does not support the video tag.
                     </video>
                 </div>
             ))}
