@@ -1,0 +1,118 @@
+/* LOGIN STYLES STARTS HERE */
+
+
+
+.loginMain {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.login-container {
+  background-color: white;
+  box-shadow: 0.5px 0.5px 5px rgb(158, 158, 158);
+  width: fit-content;
+  height: fit-content;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.login-container h2 {
+  text-align: center;
+  color: rgb(10, 10, 137);
+
+  margin: 0px 0px 10px;
+}
+
+small {
+  display: block;
+  font-size: 12px;
+  margin: 0px 0px 4px;
+}
+
+.form-group input {
+  padding: 8px;
+  border: none;
+  width: 300px;
+  background-color: aliceblue;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  /* outline: 1px solid blueviolet; */
+  outline: none;
+
+}
+
+.login-container button {
+  background-color: blueviolet;
+  border: none;
+  width: 100%;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* LOGIN STYLES ENDS HERE */
+
+.video-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  position: relative;
+  gap: 30px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* background-color: rgba(0, 0, 0, 0.7); */
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+.background-overlay.active {
+  opacity: 0.7;
+}
+
+.video-element {
+  width: 300px;
+  height: 200px;
+  position: relative;
+  transition: transform 2s ease-in-out, width 2s ease-in-out, height 2s ease-in-out;
+  transform-origin: center center;
+}
+
+.videoCovercontainer {
+  width: 300px;
+  height: 200px;
+
+  box-shadow: 0.6px 0.5px 10px rgb(191, 191, 191);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.video-element.zoom {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  object-fit: cover;
+transition: width 2s ease-in-out, height 2s ease-in-out, transform 2s ease-in-out;
+}
+
+.video-element.zoom-out {
+  width: 300px;
+  height: 200px;
+  position: absolute;
+  z-index: 2;
+  transition: width 2s ease-in-out, height 2s ease-in-out, transform 2s ease-in-out;
+}
