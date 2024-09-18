@@ -1,52 +1,95 @@
 import React, { useEffect, useState } from 'react';
+import goat from '../video/goat.mp4'
 
 const Home = () => {
     const [zoomIndex, setZoomIndex] = useState(0); // Track which video is zooming
     const [isZoomedIn, setIsZoomedIn] = useState(false); // Track if a video is zoomed in
+    const [clickedIndex, setClickedIndex] = useState(null); // Track which video is clicked
 
-    // Videos to be rendered
+
     const videos = [
-        'https://www.w3schools.com/html/mov_bbb.mp4',
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
+        goat,
 
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
-        'https://www.w3schools.com/html/mov_bbb.mp4',
     ];
 
+
     useEffect(() => {
-        const handleZoomEffect = () => {
-            setIsZoomedIn(true); // Start zooming in
+        if (clickedIndex === null) {
+            const zoomDuration = 5000;
+            const delayBetweenZooms = 3000;
+            const totalInterval = zoomDuration + delayBetweenZooms;
 
-            setTimeout(() => {
-                setIsZoomedIn(false); // Start zooming out
-            }, 5000); // Hold zoom for 5 seconds
+            const handleZoomEffect = () => {
+                setIsZoomedIn(true);
 
-            setTimeout(() => {
-                setZoomIndex((prevIndex) => (prevIndex + 1) % videos.length);
-            }, 8000); // 3s zoom-in + 5s hold time = 8s
-        };
+                setTimeout(() => {
+                    setIsZoomedIn(false);
+                }, zoomDuration);
+            };
 
-        handleZoomEffect(); // Start the zoom effect
-
-        const interval = setInterval(() => {
             handleZoomEffect();
-        }, 8000); // Repeat every 8 seconds
 
-        return () => clearInterval(interval); // Cleanup
-    }, [videos.length]);
+            const interval = setInterval(() => {
+                setZoomIndex((prevIndex) => (prevIndex + 1) % videos.length);
+                handleZoomEffect();
+            }, totalInterval);
+            return () => clearInterval(interval);
+        }
+    }, [clickedIndex, videos.length]);
+
+    const handleVideoClick = (index) => {
+        if (clickedIndex === index) {
+
+            setIsZoomedIn(false);
+            setClickedIndex(null);
+        } else {
+
+            setClickedIndex(index);
+            setIsZoomedIn(true);
+
+            setTimeout(() => {
+                setIsZoomedIn(false);
+                setClickedIndex(null);
+            }, 5000);
+        }
+    };
 
     return (
         <div className="video-container">
             <div className={`background-overlay ${isZoomedIn ? 'active' : ''}`} />
 
             {videos.map((videoSrc, index) => (
-                <div className="videoCovercontainer" key={index}>
+                <div
+                    className="videoCovercontainer"
+                    key={index}
+                    onClick={() => handleVideoClick(index)}
+                >
                     <video
-                        className={`video-element ${zoomIndex === index ? (isZoomedIn ? 'zoom' : 'zoom-out') : ''}`}
-                        controls autoPlay muted
+                        className={`video-element ${(clickedIndex === index || (clickedIndex === null && zoomIndex === index))
+                            ? isZoomedIn ? 'zoom' : 'zoom-out'
+                            : ''
+                            }`}
+                        autoPlay
+                        muted
                     >
                         <source src={videoSrc} type="video/mp4" />
                         Your browser does not support the video tag.
@@ -56,5 +99,6 @@ const Home = () => {
         </div>
     );
 };
+
 
 export default Home;

@@ -1,7 +1,5 @@
 /* LOGIN STYLES STARTS HERE */
 
-
-
 .loginMain {
   height: 100vh;
   width: 100%;
@@ -23,7 +21,6 @@
 .login-container h2 {
   text-align: center;
   color: rgb(10, 10, 137);
-
   margin: 0px 0px 10px;
 }
 
@@ -40,7 +37,6 @@ small {
   background-color: aliceblue;
   margin-bottom: 10px;
   border-radius: 5px;
-  /* outline: 1px solid blueviolet; */
   outline: none;
 
 }
@@ -56,6 +52,9 @@ small {
 
 /* LOGIN STYLES ENDS HERE */
 
+
+
+/* VIDEOSEC STYLES STARTS HERE */
 .video-container {
   display: flex;
   flex-wrap: wrap;
@@ -67,46 +66,51 @@ small {
 }
 
 .background-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  /* background-color: rgba(0, 0, 0, 0.7); */
+  background-color: rgba(0, 0, 0, 0.8);
   opacity: 0;
-  transition: opacity 2s ease-in-out;
+  z-index: 1000;
+  transition: opacity 1s ease-in-out;
 }
 
 .background-overlay.active {
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .video-element {
   width: 300px;
   height: 200px;
+  border-radius: 10px;
   position: relative;
   transition: transform 2s ease-in-out, width 2s ease-in-out, height 2s ease-in-out;
   transform-origin: center center;
+
+
 }
 
 .videoCovercontainer {
   width: 300px;
   height: 200px;
-
+  padding: 10PX 20PX;
   box-shadow: 0.6px 0.5px 10px rgb(191, 191, 191);
   border-radius: 10px;
   overflow: hidden;
 }
 
 .video-element.zoom {
-  width: 100vw;
-  height: 100vh;
+  width: 80vw;
+  height: 80vh;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
   z-index: 1000;
   object-fit: cover;
-transition: width 2s ease-in-out, height 2s ease-in-out, transform 2s ease-in-out;
+  box-shadow: 0.6px 0.5px 10px rgb(191, 191, 191);
 }
 
 .video-element.zoom-out {
@@ -114,5 +118,7 @@ transition: width 2s ease-in-out, height 2s ease-in-out, transform 2s ease-in-ou
   height: 200px;
   position: absolute;
   z-index: 2;
-  transition: width 2s ease-in-out, height 2s ease-in-out, transform 2s ease-in-out;
+  
 }
+
+/* VIDEOSEC STYLES END HERE */
