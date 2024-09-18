@@ -42,11 +42,11 @@ small {
 }
 
 .login-container button {
-  background-color: blueviolet;
+  background-color: #000d9c;;
   border: none;
   width: 100%;
   color: white;
-  padding: 5px;
+  padding: 10px;
   border-radius: 5px;
 }
 

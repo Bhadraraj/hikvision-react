@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import goat from '../video/goat.mp4'
+import ideaUx from '../video/ideaUx.mp4'
 
 const Home = () => {
     const [zoomIndex, setZoomIndex] = useState(0); // Track which video is zooming
@@ -8,26 +8,26 @@ const Home = () => {
 
 
     const videos = [
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
-        goat,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
+        ideaUx,
 
     ];
 
@@ -89,7 +89,7 @@ const Home = () => {
                             : ''
                             }`}
                         autoPlay
-                        muted
+                        muted loop
                     >
                         <source src={videoSrc} type="video/mp4" />
                         Your browser does not support the video tag.
