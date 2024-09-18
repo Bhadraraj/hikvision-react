@@ -1,36 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import ideaUx from '../video/ideaUx.mp4'
+import ideaUx from '../video/ideaUx.mp4';
+// import ideaUx from '../video/nature.mp4';
 
 const Home = () => {
-    const [zoomIndex, setZoomIndex] = useState(0); // Track which video is zooming
-    const [isZoomedIn, setIsZoomedIn] = useState(false); // Track if a video is zoomed in
-    const [clickedIndex, setClickedIndex] = useState(null); // Track which video is clicked
-
+    const [zoomIndex, setZoomIndex] = useState(0); 
+    const [isZoomedIn, setIsZoomedIn] = useState(false); 
+    const [clickedIndex, setClickedIndex] = useState(null);
 
     const videos = [
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-        ideaUx,
-
+        ideaUx, ideaUx, ideaUx, ideaUx, ideaUx, ideaUx, ideaUx, ideaUx, ideaUx, ideaUx,
+        ideaUx, ideaUx, ideaUx, ideaUx, ideaUx, ideaUx, ideaUx, ideaUx, ideaUx, ideaUx,
     ];
-
 
     useEffect(() => {
         if (clickedIndex === null) {
@@ -40,7 +20,6 @@ const Home = () => {
 
             const handleZoomEffect = () => {
                 setIsZoomedIn(true);
-
                 setTimeout(() => {
                     setIsZoomedIn(false);
                 }, zoomDuration);
@@ -52,17 +31,16 @@ const Home = () => {
                 setZoomIndex((prevIndex) => (prevIndex + 1) % videos.length);
                 handleZoomEffect();
             }, totalInterval);
+
             return () => clearInterval(interval);
         }
     }, [clickedIndex, videos.length]);
 
     const handleVideoClick = (index) => {
         if (clickedIndex === index) {
-
             setIsZoomedIn(false);
             setClickedIndex(null);
         } else {
-
             setClickedIndex(index);
             setIsZoomedIn(true);
 
@@ -85,11 +63,15 @@ const Home = () => {
                 >
                     <video
                         className={`video-element ${(clickedIndex === index || (clickedIndex === null && zoomIndex === index))
-                            ? isZoomedIn ? 'zoom' : 'zoom-out'
-                            : ''
+                                ? isZoomedIn
+                                    ? 'zoom'
+                                    : 'zoom-out'
+                                : ''
                             }`}
                         autoPlay
-                        muted loop
+                        muted
+                        loop
+                        playsInline
                     >
                         <source src={videoSrc} type="video/mp4" />
                         Your browser does not support the video tag.
@@ -99,6 +81,5 @@ const Home = () => {
         </div>
     );
 };
-
 
 export default Home;
